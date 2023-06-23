@@ -28,9 +28,30 @@ const getwalletBalance = async() => {
         console.error(err)
     }
 }
-const main = async() => {
+/* use this function to get balance */
+// const main = async() => {
+//     await getwalletBalance()
+// }
+// main()
+
+/*we got our balance
+it says zero works well
+*/
+
+const airdrop = async() => {
+    try {
+        const connection = new Connection(clusterApiUrl('devnet'),'confirmed')
+        const fromairsig = await connection.requestAirdrop(publicKey,2 * LAMPORTS_PER_SOL)
+        await connection.confirmTransaction(fromairsig)
+    }catch(err) {
+        console.log(err)
+    }
+}
+const main = async() => 
+{
+    await getwalletBalance()
+    await airdrop()
     await getwalletBalance()
 }
+
 main()
-//we got our balance
-//it says zero works well
